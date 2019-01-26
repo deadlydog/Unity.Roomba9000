@@ -388,17 +388,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c041d7c04589a0648bd37324190c4204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 20
-  defaultMaxSpeed: 14
+  acceleration: 2000
+  maxMovementSpeed: 100
+  rotationSpeed: 100
   jumpPower: 10
-  jetpackPower: 20
-  tiltPower: 2.5
-  body: {fileID: 31135813}
-  jetpackParticles: {fileID: 0}
-  landingTimer: 0
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  bodyTransform: {fileID: 0}
 --- !u!1 &1461032385
 GameObject:
   m_ObjectHideFlags: 0

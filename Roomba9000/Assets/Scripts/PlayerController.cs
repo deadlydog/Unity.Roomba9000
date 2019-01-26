@@ -1,37 +1,37 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
 	public float acceleration;
-	public float defaultMaxSpeed;
-	private float maxSpeed;
+	public float maxMovementSpeed;
+	public float rotationSpeed;
 	public float jumpPower;
 
 	public Transform bodyTransform;
-	private Quaternion defaultRotation;
 	private Rigidbody rigidBody;
 
 	// Start is called before the first frame update
 	void Start()
 	{
-		defaultRotation = transform.rotation;
+
 	}
 
 	// Runs before Start()
 	private void Awake()
 	{
 		rigidBody = GetComponent<Rigidbody>();
-		maxSpeed = defaultMaxSpeed;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
+		RotatePlayerBasedOnInput();
 		MovePlayerBasedOnInput();
 
-		if (rigidBody.velocity.magnitude > maxSpeed)
+		if (rigidBody.velocity.magnitude > maxMovementSpeed)
 		{
-			rigidBody.velocity = rigidBody.velocity.normalized * maxSpeed;
+			rigidBody.velocity = rigidBody.velocity.normalized * maxMovementSpeed;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Space))
@@ -40,14 +40,27 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
+	private void RotatePlayerBasedOnInput()
+	{
+		// Get how much input was received.
+		float inputAmount = Input.GetAxis("Horizontal");
+		if (inputAmount == 0f)
+			return;
+
+		Vector3 rotationAmount = new Vector3(0, inputAmount, 0) * rotationSpeed * Time.deltaTime;
+		rigidBody.transform.Rotate(rotationAmount);
+	}
+
 	private void MovePlayerBasedOnInput()
 	{
-		float moveHorizontal = Input.GetAxis("Horizontal");
-		float moveVertical = Input.GetAxis("Vertical");
+		// Get how much input was received.
+		float inputAmount = Input.GetAxis("Vertical");
+		if (inputAmount == 0f)
+			return;
 
-		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
-
-		rigidBody.AddForce(movement * acceleration);
+		float movementAmount = inputAmount * acceleration * Time.deltaTime;
+		Vector3 movement = new Vector3(0f, 0f, movementAmount);
+		rigidBody.AddForce(movement);
 	}
 
 	private void Jump()
