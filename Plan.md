@@ -2,4 +2,5 @@
 2. Home unit. Power
 3. Generate floor
 4. Generate enemies
-5. Profit?
+5. Ai's 
+6. Profit?
