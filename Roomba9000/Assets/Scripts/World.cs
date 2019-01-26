@@ -51,7 +51,7 @@ public class World : MonoBehaviour
 
     void OnDrawGizmos() {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 1);
+        Gizmos.DrawSphere(transform.position, 0.5f);
     }
 
     void createMesh(int[,] map) {
@@ -74,11 +74,16 @@ public class World : MonoBehaviour
                 output += '\n';
             }
 
-            Debug.Log(output);
+            // Debug.Log(output);
         }
 
         mesh.vertices = vertArray.ToArray();
         mesh.triangles = triangles.ToArray();
+        mesh.name = "terrain"; 
+
+        MeshCollider meshCollider = gameObject.AddComponent(typeof(MeshCollider)) as MeshCollider;
+        mesh.RecalculateBounds();
+        meshCollider.sharedMesh = mesh;
     }
 
     void generateSquare(int x, int z, List<Vector3> vertArray, List<int> triangles) {
