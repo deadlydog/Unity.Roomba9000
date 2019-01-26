@@ -8,8 +8,7 @@ public class PlayerController : MonoBehaviour
 	public float rotationSpeed;
 	public float jumpPower;
 
-	public Transform bodyTransform;
-	private Rigidbody rigidBody;
+	private Rigidbody playerRigidbody;
 
 	// Start is called before the first frame update
 	void Start()
@@ -20,7 +19,7 @@ public class PlayerController : MonoBehaviour
 	// Runs before Start()
 	private void Awake()
 	{
-		rigidBody = GetComponent<Rigidbody>();
+		playerRigidbody = GetComponent<Rigidbody>();
 	}
 
 	// Update is called once per frame
@@ -29,9 +28,9 @@ public class PlayerController : MonoBehaviour
 		RotatePlayerBasedOnInput();
 		MovePlayerBasedOnInput();
 
-		if (rigidBody.velocity.magnitude > maxMovementSpeed)
+		if (playerRigidbody.velocity.magnitude > maxMovementSpeed)
 		{
-			rigidBody.velocity = rigidBody.velocity.normalized * maxMovementSpeed;
+			playerRigidbody.velocity = playerRigidbody.velocity.normalized * maxMovementSpeed;
 		}
 
 		if (Input.GetKeyDown(KeyCode.Space))
@@ -48,7 +47,7 @@ public class PlayerController : MonoBehaviour
 			return;
 
 		Vector3 rotationAmount = new Vector3(0, inputAmount, 0) * rotationSpeed * Time.deltaTime;
-		rigidBody.transform.Rotate(rotationAmount);
+		playerRigidbody.transform.Rotate(rotationAmount);
 	}
 
 	private void MovePlayerBasedOnInput()
@@ -59,12 +58,11 @@ public class PlayerController : MonoBehaviour
 			return;
 
 		float movementAmount = inputAmount * acceleration * Time.deltaTime;
-		Vector3 movement = new Vector3(0f, 0f, movementAmount);
-		rigidBody.AddForce(movement);
+		playerRigidbody.AddRelativeForce(0, 0, movementAmount);
 	}
 
 	private void Jump()
 	{
-		rigidBody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+		playerRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
 	}
 }
