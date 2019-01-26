@@ -15,6 +15,11 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+		if (pickUp == null)
+		{
+			Debug.Log("pickUp is null in GameController.cs.");
+		}
+
 		SpawnPickUps();
     }
 
