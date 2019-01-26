@@ -10,7 +10,7 @@ public class PickUp : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,14 +19,19 @@ public class PickUp : MonoBehaviour
         
     }
 
-	private void OnTriggerEnter(Collider other)
+	private void OnDestroy()
 	{
-		Debug.Log(other.name);
-		if (other.tag != "PlayerVacuum")
-			return;
-
 		//gameController.score += points;
-
-		Destroy(gameObject);
 	}
+
+	//private void OnTriggerEnter(Collider other)
+	//{
+	//	Debug.Log(other.name);
+	//	if (other.tag != "PlayerVacuum")
+	//		return;
+
+	//	//gameController.score += points;
+
+	//	Destroy(gameObject);
+	//}
 }
