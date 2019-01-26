@@ -1,5 +1,16 @@
-1. Basic robot. Movement.
-2. Home unit. Power
-3. Generate floor
-4. Generate enemies
-5. Profit?
+# The Plan
+
+## Essentials
+
+* Basic robot.
+* Movement.
+* Home unit. Power
+* Static level
+* HUD to display power left and score.
+
+## Nice To Haves
+
+* Generated levels
+* Generate enemies
+* Enemies can move
+* Profit?
