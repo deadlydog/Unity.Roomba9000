@@ -27,10 +27,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (Input.GetAxis("Horizontal") != 0)
-		{
-			MoveDirection(Input.GetAxis("Horizontal"));
-		}
+		MovePlayerBasedOnInput();
 
 		if (rigidBody.velocity.magnitude > maxSpeed)
 		{
@@ -43,18 +40,14 @@ public class PlayerController : MonoBehaviour
 		}
 	}
 
-	private void MoveDirection(float direction)
+	private void MovePlayerBasedOnInput()
 	{
-		rigidBody.AddForce(Vector3.right * direction * acceleration);
+		float moveHorizontal = Input.GetAxis("Horizontal");
+		float moveVertical = Input.GetAxis("Vertical");
 
-		if (direction > 0)
-		{
-			bodyTransform.localEulerAngles = Vector3.zero;
-		}
-		else
-		{
-			bodyTransform.localEulerAngles = new Vector3(0, 180, 0);
-		}
+		Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+		rigidBody.AddForce(movement * acceleration);
 	}
 
 	private void Jump()
