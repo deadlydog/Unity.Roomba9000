@@ -2,15 +2,18 @@
 
 ## Essentials
 
-* Basic robot.
-* Movement.
+* Basic robot. ✔️
+* Movement. ✔️
 * Home unit. Power
-* Static level
+* Static level ✔️
 * HUD to display power left and score.
 
 ## Nice To Haves
 
-* Generated levels
+* Generated levels ✔️
 * Generate enemies
 * Enemies can move
+* Dirty counter
+* End Game Review generator
+* Menu
 * Profit?
