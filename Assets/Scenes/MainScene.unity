@@ -112,6 +112,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &526908916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 526908917}
+  m_Layer: 0
+  m_Name: Roomba
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &526908917
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 526908916}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.5045762, y: 0.2981062, z: -0.6526208}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 673701024}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &673701019
 GameObject:
   m_ObjectHideFlags: 0
@@ -126,7 +157,7 @@ GameObject:
   - component: {fileID: 673701021}
   - component: {fileID: 673701020}
   m_Layer: 0
-  m_Name: Roomba
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -144,6 +175,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c041d7c04589a0648bd37324190c4204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  acceleration: 20
+  defaultMaxSpeed: 15
+  jumpPower: 10
+  jetpackPower: 20
+  tiltPower: 2.5
+  body: {fileID: 673701024}
+  jetpackParticles: {fileID: 0}
+  landingTimer: 0
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!65 &673701021
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -210,12 +252,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 673701019}
   m_LocalRotation: {x: -0, y: 0.07883715, z: -0, w: 0.99688756}
-  m_LocalPosition: {x: 0.534, y: 0.51919, z: -0.469}
+  m_LocalPosition: {x: 0.029423773, y: 0.22108382, z: 0.18362078}
   m_LocalScale: {x: 1, y: 0.20084833, z: 1}
   m_Children:
   - {fileID: 682728327}
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 526908917}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 9.043, z: 0}
 --- !u!1 &682728326
 GameObject:
