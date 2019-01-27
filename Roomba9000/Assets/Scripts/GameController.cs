@@ -54,9 +54,10 @@ public class GameController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void FixedUpdate()
+	void Update()
     {
-		energy = energy - (Time.deltaTime * powerConsumptionRate);
+		var energyUsed = (Time.deltaTime * powerConsumptionRate);
+		UpdateEnergy(-energyUsed);
 
 		if (energy < 0) {
 			// TODO end game condition
@@ -87,7 +88,7 @@ public class GameController : MonoBehaviour
 
 	private void DrawEnergy()
 	{
-		energyText.text = "Energy: " + energy;
+		energyText.text = "Energy: " + energy.ToString("N0");
 	}
 	
 	private Void endGame(int reason) {

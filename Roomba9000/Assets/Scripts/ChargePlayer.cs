@@ -21,7 +21,7 @@ public class ChargePlayer : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (charging && gameController.energy < 100) {
             gameController.UpdateEnergy(Time.deltaTime * CHARGING_RATE);
@@ -30,12 +30,18 @@ public class ChargePlayer : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
 	{
-        charging = other.tag == "ChargingStation";
+        if (other.tag == "ChargingStation")
+		{
+			charging = true;
+		}
 	}
     
 
     private void OnTriggerExit(Collider other)
 	{
-        charging = false;
+		if (other.tag == "ChargingStation")
+		{
+			charging = false;
+		}
 	}
 }
