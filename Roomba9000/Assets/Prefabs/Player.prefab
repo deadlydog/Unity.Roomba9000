@@ -118,6 +118,7 @@ GameObject:
   - component: {fileID: 1404279109}
   - component: {fileID: 1017164004}
   - component: {fileID: 892048841821760301}
+  - component: {fileID: 234461110}
   m_Layer: 0
   m_Name: Vacuum
   m_TagString: PlayerVacuum
@@ -305,6 +306,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &234461110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1404279105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6d287259b24ed2b4988cc4a9143744c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1498638708
 GameObject:
   m_ObjectHideFlags: 0
@@ -1130,7 +1143,7 @@ MonoBehaviour:
   acceleration: 750
   maxMovementSpeed: 100
   rotationSpeed: 100
-  jumpPower: 10
+  jumpPower: 5
 --- !u!1 &6103716963752186635
 GameObject:
   m_ObjectHideFlags: 0
