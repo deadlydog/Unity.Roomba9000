@@ -16,12 +16,12 @@ public class GameController : MonoBehaviour
 	public GameObject hazard;
 
 	private int numberOfInitialPickUps = 20;
-	private int secondsBetweenPickUpSpawns = 1;
+	private float secondsBetweenPickUpSpawns = 0.5f;
 	public Vector3 pickUpSpawnValues;
 
 	private int numberOfInitialHazards = 5;
-	private int secondsBetweenHazardSpawns = 2;
-	public Vector3 hazardSpawnValues;
+	private float secondsBetweenHazardSpawns = 1.0f;
+	private Vector3 hazardSpawnValues = new Vector3(World.MAX_SIZE * World.TILE_SIZE, 1, World.MAX_SIZE * World.TILE_SIZE);
 	
 
 	const int NO_POWER = 0;
@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
+		Debug.Log(World.MAX_SIZE * World.TILE_SIZE);
 		DrawScore();
 		DrawEnergy();
 

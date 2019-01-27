@@ -22,11 +22,11 @@ public class World : MonoBehaviour
     const int WALL = 1;
     const int CARPET = 2;
 
-    public int MAX_SIZE = 50;
+    public static int MAX_SIZE = 50;
     private int NOTHING_RATE = 55; 
     private int NOTHING_RATE_OUT_OF = 100;
 
-    public float TILE_SIZE = 1;
+    public static float TILE_SIZE = 1;
 
     // Start is called before the first frame update
     void Start()
