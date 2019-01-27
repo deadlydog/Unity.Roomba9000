@@ -15,7 +15,7 @@ public class CollectPickUps : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
     {
-		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
+		gameController = GameObject.FindWithTag("GameController")?.GetComponent<GameController>();
 		if (gameController == null)
 		{
 			Debug.Log("gameController in CollectPickUps.cs is null.");
