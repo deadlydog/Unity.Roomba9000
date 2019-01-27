@@ -50,8 +50,8 @@ public class World : MonoBehaviour
     }
 
     void OnDrawGizmos() {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(transform.position, 0.5f);
+        // Gizmos.color = Color.yellow;
+        // Gizmos.DrawSphere(transform.position, 0.5f);
     }
 
     void createMesh(int[,] map) {

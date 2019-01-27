@@ -6,7 +6,11 @@ using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
+
+	public float powerConsumptionRate = 0.1f;
+
 	public int score;
+	public float energy = 100;
 	public GameObject pickUp;
 
 	public int numberOfPickUps;
@@ -34,8 +38,12 @@ public class GameController : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void Update()
+	void FixedUpdate()
     {
-        
+		energy = energy - (Time.deltaTime * powerConsumptionRate);
+
+		if (energy < 0) {
+			// TODO end game condition
+		}
     }
 }
