@@ -386,6 +386,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8767476897032018499, guid: 5a29530caca555041809e6fa7162a050,
+        type: 3}
+      propertyPath: numberOfInitialPickUps
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767476897032018499, guid: 5a29530caca555041809e6fa7162a050,
+        type: 3}
+      propertyPath: pickUpSpawnRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8767476897032018499, guid: 5a29530caca555041809e6fa7162a050,
+        type: 3}
+      propertyPath: secondBetweenPickUpSpawn
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a29530caca555041809e6fa7162a050, type: 3}
 --- !u!1 &1048269723

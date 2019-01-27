@@ -14,8 +14,10 @@ public class GameController : MonoBehaviour
 	private float energy = 100;
 	public GameObject pickUp;
 
-	public int numberOfPickUps;
+	private int numberOfInitialPickUps = 20;
+	private int secondsBetweenPickUpSpawns = 1;
 	public Vector3 pickUpSpawnValues;
+	
 
 	const int NO_POWER = 0;
 	const int TOO_DIRTY = 0;
@@ -41,18 +43,33 @@ public class GameController : MonoBehaviour
 		DrawScore();
 		DrawEnergy();
 
-		SpawnPickUps();
+		SpawnInitialPickUps();
+		StartCoroutine(SpawnPickUpsContinually());
     }
-
-	private void SpawnPickUps()
+	private void SpawnInitialPickUps()
 	{
-		for (int i = 0; i < numberOfPickUps; i++)
+		for (int i = 0; i < numberOfInitialPickUps; i++)
 		{
-			var position = new Vector3(Random.Range(-pickUpSpawnValues.x, pickUpSpawnValues.x), pickUpSpawnValues.y, Random.Range(-pickUpSpawnValues.z, pickUpSpawnValues.z));
-			var rotation = Quaternion.identity;
-			Instantiate(pickUp, position, rotation);
+			CreatePickUp();
 		}
 	}
+
+	private void CreatePickUp()
+	{
+		var position = new Vector3(Random.Range(-pickUpSpawnValues.x, pickUpSpawnValues.x), pickUpSpawnValues.y, Random.Range(-pickUpSpawnValues.z, pickUpSpawnValues.z));
+		var rotation = Quaternion.identity;
+		Instantiate(pickUp, position, rotation);
+	}
+
+	private IEnumerator SpawnPickUpsContinually()
+	{
+		while (true)
+		{
+			CreatePickUp();
+			yield return new WaitForSeconds(secondsBetweenPickUpSpawns);
+		}
+	}
+
 
 	// Update is called once per frame
 	void Update()
