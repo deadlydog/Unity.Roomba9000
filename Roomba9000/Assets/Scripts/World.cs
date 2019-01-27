@@ -40,7 +40,9 @@ public class World : MonoBehaviour
         Random random = new Random();
 
         int[,] map = new int[MAX_SIZE, MAX_SIZE]; 
-        
+
+        Stack myStack = new Stack();
+
         for (int x = startingCorner; x < endCorner +size; x++) {
             
         }
