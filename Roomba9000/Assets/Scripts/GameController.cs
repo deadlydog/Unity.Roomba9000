@@ -166,9 +166,9 @@ public class GameController : MonoBehaviour
 	}
 
 	private string GenerateReviewNoPower() {
-		if (score > 9000) {
+		if (score > 100) {
 			return "I use to think it was a perpetual motion generator. Until the battery died.";
-		} else if (score > 6000) {
+		} else if (score > 50) {
 			return "Battery life is kind of crap...";
 		}
 		return "I don't think it ever turned on...";
@@ -176,11 +176,11 @@ public class GameController : MonoBehaviour
 
 	private string GenerateReviewTooDirty()
 	{
-		if (score > 9000)
+		if (score > 100)
 		{
 			return "It worked well for the first century.";
 		}
-		else if (score > 6000)
+		else if (score > 50)
 		{
 			return "It might have worked at one time...";
 		}
