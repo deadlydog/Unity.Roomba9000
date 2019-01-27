@@ -5,9 +5,15 @@ using UnityEngine;
 public class CollectPickUps : MonoBehaviour
 {
 	private GameController gameController;
+	private AudioSource audioData;
 
-    // Start is called before the first frame update
-    void Start()
+	private void Awake()
+	{
+		audioData = GetComponent<AudioSource>();
+	}
+
+	// Start is called before the first frame update
+	void Start()
     {
 		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 		if (gameController == null)
@@ -39,5 +45,7 @@ public class CollectPickUps : MonoBehaviour
 		}
 
 		Destroy(other.gameObject);
+
+		audioData.Play();
 	}
 }
