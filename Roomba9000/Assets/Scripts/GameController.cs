@@ -17,13 +17,11 @@ public class GameController : MonoBehaviour
 	public int numberOfPickUps;
 	public Vector3 pickUpSpawnValues;
 
-<<<<<<< HEAD
 	const int NO_POWER = 0;
 	const int TOO_DIRTY = 0;
-=======
+
 	private Text scoreText;
 	private Text energyText;
->>>>>>> 6ab2f828a4b135ba45803a8cb02928f564130afd
 
     // Start is called before the first frame update
     void Start()
@@ -64,7 +62,7 @@ public class GameController : MonoBehaviour
 			endGame(0);
 		}
 
-		if (FindObjectsOfType<PickUp>() > 500) {
+		if (FindObjectsOfType<PickUp>().Length > 500) {
 			endGame(1);
 		}
     }
@@ -91,8 +89,8 @@ public class GameController : MonoBehaviour
 		energyText.text = "Energy: " + energy.ToString("N0");
 	}
 	
-	private Void endGame(int reason) {
-		String review = ""
+	private void endGame(int reason) {
+		String review = "";
 		if (reason == NO_POWER) {
 			review = GenerateReviewNoPower();
 		} else if (reason == TOO_DIRTY){
@@ -101,7 +99,7 @@ public class GameController : MonoBehaviour
 		Debug.Log(review);
 	}
 
-	private String GenerateReviewNoPower() {
+	private string GenerateReviewNoPower() {
 		if (score > 9000) {
 			return "I use to think it was a perpetual motion generator. Until the battery died.";
 		} else if (score > 6000) {
@@ -110,11 +108,16 @@ public class GameController : MonoBehaviour
 		return "I don't think it ever turned on...";
 	}
 
-	private String GenerateReviewTooDirty() {
-		if (score > 9000) {
+	private string GenerateReviewTooDirty()
+	{
+		if (score > 9000)
+		{
 			return "It worked well for the first century.";
-		} else if (score > 6000) {
+		}
+		else if (score > 6000)
+		{
 			return "It might have worked at one time...";
 		}
 		return "My house is dirty because of this thing...";
+	}
 }
