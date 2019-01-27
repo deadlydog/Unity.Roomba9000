@@ -46,7 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerConsumptionRate: 0.5
   pickUp: {fileID: 3473889440537427462, guid: 9fcf1c393c633214d896d1eb5ff79b25, type: 3}
-  numberOfPickUps: 20
   pickUpSpawnValues: {x: 10, y: 0.2, z: 10}
 --- !u!82 &783087480478274016
 AudioSource:
