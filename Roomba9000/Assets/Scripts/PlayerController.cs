@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody playerRigidbody;
 
+	private Camera overheadCamera;
+	private Camera firstPersonCamera;
+	private Camera orbitCamera;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -20,6 +24,14 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		playerRigidbody = GetComponent<Rigidbody>();
+
+		overheadCamera = GameObject.Find("OverheadCamera").GetComponent<Camera>();
+		firstPersonCamera = GameObject.Find("FirstPersonCamera").GetComponent<Camera>();
+		orbitCamera = GameObject.Find("OrbitCamera").GetComponent<Camera>();
+
+		overheadCamera.enabled = true;
+		firstPersonCamera.enabled = false;
+		orbitCamera.enabled = false;
 	}
 
 	// Update is called once per frame
@@ -27,15 +39,39 @@ public class PlayerController : MonoBehaviour
 	{
 		RotatePlayerBasedOnInput();
 		MovePlayerBasedOnInput();
+		JumpBasedOnInput();
+		ChangeCameraBasedOnInput();
+		EnsurePlayerIsNotMovingTooFast();
+	}
 
+	private void EnsurePlayerIsNotMovingTooFast()
+	{
 		if (playerRigidbody.velocity.magnitude > maxMovementSpeed)
 		{
 			playerRigidbody.velocity = playerRigidbody.velocity.normalized * maxMovementSpeed;
 		}
+	}
 
-		if (Input.GetKeyDown(KeyCode.Space))
+	private void ChangeCameraBasedOnInput()
+	{
+		// Camera mode order is Overhead -> First Person -> Orbit -> Overhead.
+		if (Input.GetKeyDown(KeyCode.C))
 		{
-			Jump();
+			if (overheadCamera.enabled)
+			{
+				firstPersonCamera.enabled = true;
+				overheadCamera.enabled = false;
+			}
+			else if (firstPersonCamera.enabled)
+			{
+				orbitCamera.enabled = true;
+				firstPersonCamera.enabled = false;
+			}
+			else
+			{
+				overheadCamera.enabled = true;
+				orbitCamera.enabled = false;
+			}
 		}
 	}
 
@@ -61,8 +97,11 @@ public class PlayerController : MonoBehaviour
 		playerRigidbody.AddRelativeForce(0, 0, movementAmount);
 	}
 
-	private void Jump()
+	private void JumpBasedOnInput()
 	{
-		playerRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			playerRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+		}
 	}
 }

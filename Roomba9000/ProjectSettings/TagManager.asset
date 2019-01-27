@@ -9,6 +9,7 @@ TagManager:
   - ChargingStation
   - ScoreText
   - EnergyText
+  - Hazard
   layers:
   - Default
   - TransparentFX
