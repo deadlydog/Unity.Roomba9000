@@ -102,7 +102,7 @@ public class GameController : MonoBehaviour
 
 	private String GenerateReviewNoPower() {
 		if (score > 9000) {
-			return "I think this thing is a perpetual motion generator.";
+			return "I use to think it was a perpetual motion generator. Until the battery died.";
 		} else if (score > 6000) {
 			return "Battery life is kind of crap...";
 		}
