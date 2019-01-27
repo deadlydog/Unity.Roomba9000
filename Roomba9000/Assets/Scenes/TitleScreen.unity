@@ -762,7 +762,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6103716963022217172}
   - component: {fileID: 6103716963022217173}
-  - component: {fileID: 6103716963022217178}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -770,22 +769,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6103716963022217178
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6103716963022217175}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c041d7c04589a0648bd37324190c4204, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  acceleration: 750
-  maxMovementSpeed: 100
-  rotationSpeed: 100
-  jumpPower: 10
 --- !u!4 &6103716963140640560
 Transform:
   m_ObjectHideFlags: 0
