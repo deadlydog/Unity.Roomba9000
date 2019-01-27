@@ -43,7 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1408fb67a6d02754fba06c44f1941731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerConsumptionRate: 0.1
   score: 0
-  pickUp: {fileID: 3473889440537427462, guid: 9fcf1c393c633214d896d1eb5ff79b25, type: 3}
+  energy: 100
+  pickUp: {fileID: 0}
   numberOfPickUps: 20
   pickUpSpawnValues: {x: 10, y: 0.2, z: 10}
