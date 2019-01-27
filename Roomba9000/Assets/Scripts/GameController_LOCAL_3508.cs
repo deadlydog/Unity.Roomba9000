@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
@@ -17,13 +16,8 @@ public class GameController : MonoBehaviour
 	public int numberOfPickUps;
 	public Vector3 pickUpSpawnValues;
 
-<<<<<<< HEAD
 	const int NO_POWER = 0;
 	const int TOO_DIRTY = 0;
-=======
-	private Text scoreText;
-	private Text energyText;
->>>>>>> 6ab2f828a4b135ba45803a8cb02928f564130afd
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +26,6 @@ public class GameController : MonoBehaviour
 		{
 			Debug.Log("pickUp is null in GameController.cs.");
 		}
-
-		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
-		energyText = GameObject.Find("EnergyText").GetComponent<Text>();
-
-		score = 0;
-		DrawScore();
-		DrawEnergy();
 
 		SpawnPickUps();
     }
@@ -68,28 +55,6 @@ public class GameController : MonoBehaviour
 		}
     }
 
-	public void UpdateScore(int points)
-	{
-		score += points;
-		DrawScore();
-	}
-
-	private void DrawScore()
-	{
-		scoreText.text = "Score: " + score;
-	}
-
-	public void UpdateEnergy(float delta)
-	{
-		energy += delta;
-		DrawEnergy();
-	}
-
-	private void DrawEnergy()
-	{
-		energyText.text = "Energy: " + energy;
-	}
-	
 	private Void endGame(int reason) {
 		String review = ""
 		if (reason == NO_POWER) {
@@ -116,4 +81,5 @@ public class GameController : MonoBehaviour
 			return "It might have worked at one time...";
 		}
 		return "My house is dirty because of this thing...";
+	}
 }

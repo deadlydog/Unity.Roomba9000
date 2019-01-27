@@ -6,13 +6,14 @@ public class ChargePlayer : MonoBehaviour
 {
     const float CHARGING_RATE = 1;
 
-    public GameController gameController;
+    private GameController gameController;
 
     private bool charging = false;
 
     // Start is called before the first frame update
     void Start()
     {
+		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
         if (gameController == null)
 		{
 			Debug.Log("gameController in CollectPickUps.cs is null.");
@@ -23,7 +24,7 @@ public class ChargePlayer : MonoBehaviour
     void FixedUpdate()
     {
         if (charging && gameController.energy < 100) {
-            gameController.energy += Time.deltaTime * CHARGING_RATE;
+            gameController.UpdateEnergy(Time.deltaTime * CHARGING_RATE);
         }
     }
 

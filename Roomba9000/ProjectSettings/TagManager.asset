@@ -7,6 +7,8 @@ TagManager:
   - PickUp
   - PlayerVacuum
   - ChargingStation
+  - ScoreText
+  - EnergyText
   layers:
   - Default
   - TransparentFX

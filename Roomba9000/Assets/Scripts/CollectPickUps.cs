@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CollectPickUps : MonoBehaviour
 {
-	public GameController gameController;
+	private GameController gameController;
 
     // Start is called before the first frame update
     void Start()
     {
+		gameController = GameObject.FindWithTag("GameController").GetComponent<GameController>();
 		if (gameController == null)
 		{
 			Debug.Log("gameController in CollectPickUps.cs is null.");
@@ -30,7 +31,7 @@ public class CollectPickUps : MonoBehaviour
 		var pickUp = other.GetComponent<PickUp>();
 		if (pickUp != null)
 		{
-			gameController.score += pickUp.points;
+			gameController.UpdateScore(pickUp.points);
 		}
 		else
 		{
