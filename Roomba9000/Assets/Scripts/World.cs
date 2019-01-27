@@ -41,7 +41,7 @@ public class World : MonoBehaviour
 
         int[,] map = new int[MAX_SIZE, MAX_SIZE]; 
 
-        Stack myStack = new Stack();
+        Stack<int> point = new Stack<int>();
 
         for (int x = startingCorner; x < endCorner +size; x++) {
             
