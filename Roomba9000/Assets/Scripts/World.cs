@@ -23,15 +23,15 @@ public class World : MonoBehaviour
     const int CARPET = 2;
 
     public int MAX_SIZE = 50;
-    private int ROOM_SIZE = 10;
+    private int NOTHING_RATE = 55; 
+    private int NOTHING_RATE_OUT_OF = 100;
 
     public float TILE_SIZE = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        // int[,] map = generateRoomBox(ROOM_SIZE);
-        int[,] map = generateRoomIslands(ROOM_SIZE);
+        int[,] map = generateRoomIslands(MAX_SIZE);
         createMesh(map);
     }
 
@@ -48,18 +48,26 @@ public class World : MonoBehaviour
 
         Stack<IntVector2> islandPoints = new Stack<IntVector2>();
 
-        IntVector2 playerIsland = new IntVector2(size/2, size/2);
+        IntVector2 center = new IntVector2(size/2, size/2);
 
-        islandPoints.Push(playerIsland);
+        IntVector2 playerIslandCenter = center;
+        IntVector2 playerIslandLeft = new IntVector2(center.x - 1, center.y);
+        IntVector2 playerIslandRight = new IntVector2(center.x + 1, center.y);
+        IntVector2 playerIslandTop = new IntVector2(center.x, center.y + 1);
+        IntVector2 playerIslandBottom = new IntVector2(center.y, center.y -1); 
+        islandPoints.Push(playerIslandCenter);
+        islandPoints.Push(playerIslandLeft);
+        islandPoints.Push(playerIslandRight);
+        islandPoints.Push(playerIslandTop);
+        islandPoints.Push(playerIslandBottom);
 
-        // for (int i = 0; i < 5; i++) {
-        //     // islandPoint;
-        //     int x = Random.Range(1, size -1);
-        //     int y = Random.Range(1, size -1 );
-        //     IntVector2 island = new IntVector2(x, y);
-        //     islandPoints.Push(island);
-        //     Debug.log("1");
-        // }
+        for (int i = 0; i < 5; i++) {
+            // islandPoint;
+            int x = Random.Range(1, size -1);
+            int y = Random.Range(1, size -1 );
+            IntVector2 island = new IntVector2(x, y);
+            islandPoints.Push(island);
+        }
  
         while (islandPoints.Count > 0) {
             IntVector2 current = islandPoints.Pop();
@@ -74,14 +82,14 @@ public class World : MonoBehaviour
             createChildrenLand(map, islandPoints, currentBottom);
             createChildrenLand(map, islandPoints, currentRight);
             createChildrenLand(map, islandPoints, currentLeft);
-            Debug.Log("points");
         }
 
         return map;
     }
 
     private void createChildrenLand(int[,] map, Stack<IntVector2> islandPoints, IntVector2 child) {
-        if (inWorld(child) && Random.Range(0,2) == 0) {
+        int nothing = Random.Range(0,NOTHING_RATE_OUT_OF);
+        if (inWorld(child) && nothing > NOTHING_RATE) {
             if (map[child.x, child.y] != CARPET){
                 islandPoints.Push(child);
             }
@@ -91,27 +99,6 @@ public class World : MonoBehaviour
     private bool inWorld(IntVector2 vector) {
         return vector.x > 0 && vector.x < MAX_SIZE
             && vector.y > 0 && vector.y < MAX_SIZE;
-    }
-
-    private int[,] generateRoomBox(int size) {
-        int startingCorner = (MAX_SIZE - size) / 2;
-        int endCorner = startingCorner + size;
-        Random random = new Random();
-
-        int[,] map = new int[MAX_SIZE, MAX_SIZE]; 
-        for (int x = startingCorner; x < endCorner +size; x++) {
-            int type = CARPET; 
-            if (x == startingCorner || x == size - 1) {
-                type = WALL;
-            }
-            for (int y = startingCorner; y < endCorner; y++) {
-                if (y == startingCorner || y == size - 1) {
-                    type = WALL;
-                }
-                map[x,y] = type;
-            }
-        }
-        return map;
     }
 
     private void createMesh(int[,] map) {
@@ -134,10 +121,9 @@ public class World : MonoBehaviour
                 }
                 output += '\n';
             }
-
-            // Debug.Log(output);
         }
-        
+        // Debug.Log(output);
+
         Material material = GetComponent<Renderer>().material;  
         Texture2D texture = generateTexture(50, Color.yellow);
         material.mainTextureScale = new Vector2(0.02f, 0.02f);
