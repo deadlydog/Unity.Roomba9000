@@ -23,7 +23,7 @@ public class ChargePlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (charging && gameController.energy < 100) {
+        if (charging && gameController.GetEnergy() < 100) {
             gameController.UpdateEnergy(Time.deltaTime * CHARGING_RATE);
         }
     }

@@ -10,8 +10,8 @@ public class GameController : MonoBehaviour
 
 	public float powerConsumptionRate = 0.1f;
 
-	public int score;
-	public float energy = 100;
+	private int score = 0;
+	private float energy = 100;
 	public GameObject pickUp;
 
 	public int numberOfPickUps;
@@ -23,9 +23,9 @@ public class GameController : MonoBehaviour
 	private Text scoreText;
 	private Text energyText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+	// Runs before Start()
+	private void Awake()
+	{
 		if (pickUp == null)
 		{
 			Debug.Log("pickUp is null in GameController.cs.");
@@ -33,8 +33,11 @@ public class GameController : MonoBehaviour
 
 		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
 		energyText = GameObject.Find("EnergyText").GetComponent<Text>();
+	}
 
-		score = 0;
+	// Start is called before the first frame update
+	void Start()
+    {
 		DrawScore();
 		DrawEnergy();
 
@@ -87,6 +90,11 @@ public class GameController : MonoBehaviour
 	private void DrawEnergy()
 	{
 		energyText.text = "Energy: " + energy.ToString("N0");
+	}
+
+	public float GetEnergy()
+	{
+		return energy;
 	}
 	
 	private void endGame(int reason) {

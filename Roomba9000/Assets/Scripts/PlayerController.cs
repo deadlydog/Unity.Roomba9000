@@ -10,6 +10,9 @@ public class PlayerController : MonoBehaviour
 
 	private Rigidbody playerRigidbody;
 
+	private Camera overheadCamera;
+	private Camera firstPersonCamera;
+
 	// Start is called before the first frame update
 	void Start()
 	{
@@ -20,6 +23,12 @@ public class PlayerController : MonoBehaviour
 	private void Awake()
 	{
 		playerRigidbody = GetComponent<Rigidbody>();
+
+		overheadCamera = GameObject.Find("OverheadCamera").GetComponent<Camera>();
+		firstPersonCamera = GameObject.Find("FirstPersonCamera").GetComponent<Camera>();
+
+		overheadCamera.enabled = false;
+		firstPersonCamera.enabled = true;
 	}
 
 	// Update is called once per frame
@@ -27,15 +36,25 @@ public class PlayerController : MonoBehaviour
 	{
 		RotatePlayerBasedOnInput();
 		MovePlayerBasedOnInput();
+		JumpBasedOnInput();
+		ChangeCameraBasedOnInput();
+		EnsurePlayerIsNotMovingTooFast();
+	}
 
+	private void EnsurePlayerIsNotMovingTooFast()
+	{
 		if (playerRigidbody.velocity.magnitude > maxMovementSpeed)
 		{
 			playerRigidbody.velocity = playerRigidbody.velocity.normalized * maxMovementSpeed;
 		}
+	}
 
-		if (Input.GetKeyDown(KeyCode.Space))
+	private void ChangeCameraBasedOnInput()
+	{
+		if (Input.GetKeyDown(KeyCode.C))
 		{
-			Jump();
+			overheadCamera.enabled = !overheadCamera.enabled;
+			firstPersonCamera.enabled = !firstPersonCamera.enabled;
 		}
 	}
 
@@ -61,8 +80,11 @@ public class PlayerController : MonoBehaviour
 		playerRigidbody.AddRelativeForce(0, 0, movementAmount);
 	}
 
-	private void Jump()
+	private void JumpBasedOnInput()
 	{
-		playerRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			playerRigidbody.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+		}
 	}
 }
