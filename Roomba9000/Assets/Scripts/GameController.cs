@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -106,6 +107,8 @@ public class GameController : MonoBehaviour
 	// Update is called once per frame
 	void Update()
     {
+		GetInputAndGoBackToTitleScreenIfNecessary();
+
 		var energyUsed = (Time.deltaTime * powerConsumptionRate);
 		UpdateEnergy(-energyUsed);
 
@@ -118,6 +121,14 @@ public class GameController : MonoBehaviour
 			endGame(1);
 		}
     }
+
+	private void GetInputAndGoBackToTitleScreenIfNecessary()
+	{
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			SceneManager.LoadScene("TitleScreen");
+		}
+	}
 
 	public void UpdateScore(int points)
 	{
