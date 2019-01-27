@@ -8,7 +8,6 @@ using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
-
 	public float powerConsumptionRate = 0.1f;
 
 	private int score = 0;
@@ -53,7 +52,7 @@ public class GameController : MonoBehaviour
 		StartCoroutine(SpawnPickUpsContinually());
 
 		SpawnInitialHazards();
-
+		StartCoroutine(SpawnHazardsContinually());
     }
 
 	private void SpawnInitialPickUps()
