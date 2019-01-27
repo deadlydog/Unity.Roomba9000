@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
 
 	private Camera overheadCamera;
 	private Camera firstPersonCamera;
+	private Camera orbitCamera;
 
 	// Start is called before the first frame update
 	void Start()
@@ -26,9 +27,11 @@ public class PlayerController : MonoBehaviour
 
 		overheadCamera = GameObject.Find("OverheadCamera").GetComponent<Camera>();
 		firstPersonCamera = GameObject.Find("FirstPersonCamera").GetComponent<Camera>();
+		orbitCamera = GameObject.Find("OrbitCamera").GetComponent<Camera>();
 
-		overheadCamera.enabled = false;
-		firstPersonCamera.enabled = true;
+		overheadCamera.enabled = true;
+		firstPersonCamera.enabled = false;
+		orbitCamera.enabled = false;
 	}
 
 	// Update is called once per frame
@@ -51,10 +54,24 @@ public class PlayerController : MonoBehaviour
 
 	private void ChangeCameraBasedOnInput()
 	{
+		// Camera mode order is Overhead -> First Person -> Orbit -> Overhead.
 		if (Input.GetKeyDown(KeyCode.C))
 		{
-			overheadCamera.enabled = !overheadCamera.enabled;
-			firstPersonCamera.enabled = !firstPersonCamera.enabled;
+			if (overheadCamera.enabled)
+			{
+				firstPersonCamera.enabled = true;
+				overheadCamera.enabled = false;
+			}
+			else if (firstPersonCamera.enabled)
+			{
+				orbitCamera.enabled = true;
+				firstPersonCamera.enabled = false;
+			}
+			else
+			{
+				overheadCamera.enabled = true;
+				orbitCamera.enabled = false;
+			}
 		}
 	}
 
