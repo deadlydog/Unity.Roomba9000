@@ -4,7 +4,7 @@
 
 * Basic robot. ✔️
 * Movement. ✔️
-* Home unit. Power
+* Home unit. Power ️️️️️
 * Static level ✔️
 * HUD to display power left and score.
 
