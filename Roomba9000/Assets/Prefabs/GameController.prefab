@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerConsumptionRate: 0.1
-  score: 0
+  score: 60
   energy: 100
-  pickUp: {fileID: 0}
+  pickUp: {fileID: 3473889440537427462, guid: 9fcf1c393c633214d896d1eb5ff79b25, type: 3}
   numberOfPickUps: 20
   pickUpSpawnValues: {x: 10, y: 0.2, z: 10}

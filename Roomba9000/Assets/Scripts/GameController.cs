@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
@@ -16,6 +17,9 @@ public class GameController : MonoBehaviour
 	public int numberOfPickUps;
 	public Vector3 pickUpSpawnValues;
 
+	private Text scoreText;
+	private Text energyText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +27,13 @@ public class GameController : MonoBehaviour
 		{
 			Debug.Log("pickUp is null in GameController.cs.");
 		}
+
+		scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+		energyText = GameObject.Find("EnergyText").GetComponent<Text>();
+
+		score = 0;
+		DrawScore();
+		DrawEnergy();
 
 		SpawnPickUps();
     }
@@ -46,4 +57,26 @@ public class GameController : MonoBehaviour
 			// TODO end game condition
 		}
     }
+
+	public void UpdateScore(int points)
+	{
+		score += points;
+		DrawScore();
+	}
+
+	private void DrawScore()
+	{
+		scoreText.text = "Score: " + score;
+	}
+
+	public void UpdateEnergy(float delta)
+	{
+		energy += delta;
+		DrawEnergy();
+	}
+
+	private void DrawEnergy()
+	{
+		energyText.text = "Energy: " + energy;
+	}
 }
