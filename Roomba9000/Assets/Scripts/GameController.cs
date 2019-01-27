@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.Scripts;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,10 +23,6 @@ public class GameController : MonoBehaviour
 	private int numberOfInitialHazards = 5;
 	private int secondsBetweenHazardSpawns = 2;
 	public Vector3 hazardSpawnValues;
-	
-
-	const int NO_POWER = 0;
-	const int TOO_DIRTY = 0;
 
 	private Text scoreText;
 	private Text energyText;
@@ -111,13 +108,18 @@ public class GameController : MonoBehaviour
 		var energyUsed = (Time.deltaTime * powerConsumptionRate);
 		UpdateEnergy(-energyUsed);
 
-		if (energy < 0) {
-			// TODO end game condition
-			endGame(0);
+		if (energy < 0)
+		{
+			CrossSceneInformation.GameOverReason = GameOverReason.NoPower;
+			CrossSceneInformation.GameOverReview = GenerateReviewNoPower();
+			EndGame();
 		}
 
-		if (FindObjectsOfType<PickUp>().Length > 500) {
-			endGame(1);
+		if (FindObjectsOfType<PickUp>().Length > 500)
+		{
+			CrossSceneInformation.GameOverReason = GameOverReason.TooDirty;
+			CrossSceneInformation.GameOverReview = GenerateReviewTooDirty();
+			EndGame();
 		}
     }
 
@@ -155,15 +157,10 @@ public class GameController : MonoBehaviour
 	{
 		return energy;
 	}
-	
-	private void endGame(int reason) {
-		String review = "";
-		if (reason == NO_POWER) {
-			review = GenerateReviewNoPower();
-		} else if (reason == TOO_DIRTY){
-			review = GenerateReviewTooDirty();
-		}
-		Debug.Log(review);
+
+	private void EndGame()
+	{
+		SceneManager.LoadScene("EndGameScene");
 	}
 
 	private string GenerateReviewNoPower() {
