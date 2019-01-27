@@ -46,7 +46,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   powerConsumptionRate: 0.5
   pickUp: {fileID: 3473889440537427462, guid: 9fcf1c393c633214d896d1eb5ff79b25, type: 3}
-  pickUpSpawnValues: {x: 10, y: 0.2, z: 10}
+  hazard: {fileID: 334260101686513839, guid: 1b212e014b2128648ab6aafe1b680cbb, type: 3}
+  pickUpSpawnValues: {x: 10, y: 0.3, z: 10}
+  hazardSpawnValues: {x: 10, y: 2, z: 10}
 --- !u!82 &783087480478274016
 AudioSource:
   m_ObjectHideFlags: 0

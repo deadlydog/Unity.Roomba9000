@@ -13,10 +13,15 @@ public class GameController : MonoBehaviour
 	private int score = 0;
 	private float energy = 100;
 	public GameObject pickUp;
+	public GameObject hazard;
 
 	private int numberOfInitialPickUps = 20;
 	private int secondsBetweenPickUpSpawns = 1;
 	public Vector3 pickUpSpawnValues;
+
+	private int numberOfInitialHazards = 5;
+	private int secondsBetweenHazardSpawns = 2;
+	public Vector3 hazardSpawnValues;
 	
 
 	const int NO_POWER = 0;
@@ -45,7 +50,11 @@ public class GameController : MonoBehaviour
 
 		SpawnInitialPickUps();
 		StartCoroutine(SpawnPickUpsContinually());
+
+		SpawnInitialHazards();
+
     }
+
 	private void SpawnInitialPickUps()
 	{
 		for (int i = 0; i < numberOfInitialPickUps; i++)
@@ -70,6 +79,29 @@ public class GameController : MonoBehaviour
 		}
 	}
 
+	private void SpawnInitialHazards()
+	{
+		for (int i = 0; i < numberOfInitialHazards; i++)
+		{
+			CreateHazard();
+		}
+	}
+
+	private void CreateHazard()
+	{
+		var position = new Vector3(Random.Range(-hazardSpawnValues.x, hazardSpawnValues.x), hazardSpawnValues.y, Random.Range(-hazardSpawnValues.z, hazardSpawnValues.z));
+		var rotation = Quaternion.identity;
+		Instantiate(hazard, position, rotation);
+	}
+
+	private IEnumerator SpawnHazardsContinually()
+	{
+		while (true)
+		{
+			CreateHazard();
+			yield return new WaitForSeconds(secondsBetweenHazardSpawns);
+		}
+	}
 
 	// Update is called once per frame
 	void Update()
