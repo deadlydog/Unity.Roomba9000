@@ -8,7 +8,7 @@ using Random = UnityEngine.Random;
 
 public class GameController : MonoBehaviour
 {
-	public float powerConsumptionRate = 0.1f;
+	private float powerConsumptionRate = 1.0f;
 
 	private int score = 0;
 	private float energy = 100;

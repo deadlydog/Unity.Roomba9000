@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ChargePlayer : MonoBehaviour
 {
-    const float CHARGING_RATE = 5;
+    const float CHARGING_RATE = 20;
 
     private GameController gameController;
 
