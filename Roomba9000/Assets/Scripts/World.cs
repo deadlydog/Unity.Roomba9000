@@ -3,6 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public struct IntVector2 {
+    public IntVector2 (int xpos, int ypos) {
+        this.x = xpos;
+        this.y = ypos;
+    }
+
+    public int x;
+    public int y;
+}
+
+
 public class World : MonoBehaviour
 {
 
@@ -12,21 +23,16 @@ public class World : MonoBehaviour
     const int CARPET = 2;
 
     public int MAX_SIZE = 50;
-    public int ROOM_SIZE = 10;
+    private int ROOM_SIZE = 10;
 
     public float TILE_SIZE = 1;
 
     // Start is called before the first frame update
     void Start()
     {
-        int[,] map = generateRoomBox(ROOM_SIZE);
+        // int[,] map = generateRoomBox(ROOM_SIZE);
+        int[,] map = generateRoomIslands(ROOM_SIZE);
         createMesh(map);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-    
     }
 
     void OnDrawGizmos() {
@@ -37,16 +43,54 @@ public class World : MonoBehaviour
     private int[,] generateRoomIslands(int size) {
         int startingCorner = (MAX_SIZE - size) / 2;
         int endCorner = startingCorner + size;
-        Random random = new Random();
 
         int[,] map = new int[MAX_SIZE, MAX_SIZE]; 
 
-        Stack<int> point = new Stack<int>();
+        Stack<IntVector2> islandPoints = new Stack<IntVector2>();
 
-        for (int x = startingCorner; x < endCorner +size; x++) {
-            
+        IntVector2 playerIsland = new IntVector2(size/2, size/2);
+
+        islandPoints.Push(playerIsland);
+
+        // for (int i = 0; i < 5; i++) {
+        //     // islandPoint;
+        //     int x = Random.Range(1, size -1);
+        //     int y = Random.Range(1, size -1 );
+        //     IntVector2 island = new IntVector2(x, y);
+        //     islandPoints.Push(island);
+        //     Debug.log("1");
+        // }
+ 
+        while (islandPoints.Count > 0) {
+            IntVector2 current = islandPoints.Pop();
+            map[current.x, current.y] = CARPET;
+
+            IntVector2 currentTop = new IntVector2(current.x, current.y +1);
+            IntVector2 currentBottom = new IntVector2(current.x, current.y -1);
+            IntVector2 currentRight = new IntVector2(current.x + 1, current.y);
+            IntVector2 currentLeft = new IntVector2(current.x - 1, current.y);
+
+            createChildrenLand(map, islandPoints, currentTop);
+            createChildrenLand(map, islandPoints, currentBottom);
+            createChildrenLand(map, islandPoints, currentRight);
+            createChildrenLand(map, islandPoints, currentLeft);
+            Debug.Log("points");
         }
+
         return map;
+    }
+
+    private void createChildrenLand(int[,] map, Stack<IntVector2> islandPoints, IntVector2 child) {
+        if (inWorld(child) && Random.Range(0,2) == 0) {
+            if (map[child.x, child.y] != CARPET){
+                islandPoints.Push(child);
+            }
+        }
+    }
+
+    private bool inWorld(IntVector2 vector) {
+        return vector.x > 0 && vector.x < MAX_SIZE
+            && vector.y > 0 && vector.y < MAX_SIZE;
     }
 
     private int[,] generateRoomBox(int size) {
