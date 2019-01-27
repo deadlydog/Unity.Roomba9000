@@ -34,6 +34,19 @@ public class World : MonoBehaviour
         // Gizmos.DrawSphere(transform.position, 0.5f);
     }
 
+    private int[,] generateRoomIslands(int size) {
+        int startingCorner = (MAX_SIZE - size) / 2;
+        int endCorner = startingCorner + size;
+        Random random = new Random();
+
+        int[,] map = new int[MAX_SIZE, MAX_SIZE]; 
+        
+        for (int x = startingCorner; x < endCorner +size; x++) {
+            
+        }
+        return map;
+    }
+
     private int[,] generateRoomBox(int size) {
         int startingCorner = (MAX_SIZE - size) / 2;
         int endCorner = startingCorner + size;
